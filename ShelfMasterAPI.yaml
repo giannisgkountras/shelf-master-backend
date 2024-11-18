@@ -27,8 +27,6 @@ tags:
       description: Operations related to product category management
     - name: Sales
       description: Operations related to sales transactions
-    - name: Warehouses
-      description: Operations related to warehouse management
 paths:
     /customers:
         get:
@@ -257,7 +255,7 @@ paths:
         get:
             summary: Get products stored in a specific warehouse
             tags:
-                - Warehouses
+                - Warehouse
             parameters:
                 - in: path
                   name: id
@@ -268,33 +266,11 @@ paths:
                 "200":
                     description: List of products stored in the warehouse
 
-    /customers/{id}/purchases-summary:
-        get:
-            summary: Get customer purchases summary
-            tags:
-                - Customers
-            parameters:
-                - in: path
-                  name: id
-                  required: true
-                  schema:
-                      type: integer
-            responses:
-                "200":
-                    description: Customer purchases summary
-    /warehouses/inventory-overview:
-        get:
-            summary: Get warehouse inventory overview
-            tags:
-                - Warehouses
-            responses:
-                "200":
-                    description: Inventory overview of all products across warehouses
     /warehouses/{id}/employees:
         get:
             summary: Get employees working at a specific warehouse
             tags:
-                - Warehouses
+                - Warehouse
             parameters:
                 - in: path
                   name: id
@@ -445,60 +421,6 @@ paths:
             responses:
                 "201":
                     description: Attendance record created successfully
-
-    /attendance/{id}:
-        get:
-            tags:
-                - Attendance
-            summary: Retrieve details of a specific attendance record
-            parameters:
-                - in: path
-                  name: id
-                  required: true
-                  schema:
-                      type: integer
-            responses:
-                "200":
-                    description: Attendance record details
-        put:
-            tags:
-                - Attendance
-            summary: Update an existing attendance record
-            parameters:
-                - in: path
-                  name: id
-                  required: true
-                  schema:
-                      type: integer
-            requestBody:
-                required: true
-                content:
-                    application/json:
-                        schema:
-                            type: object
-                            properties:
-                                status:
-                                    type: string
-                                    enum: [in, out]
-                                timestamp:
-                                    type: string
-                                    format: date-time
-            responses:
-                "200":
-                    description: Attendance record updated successfully
-        delete:
-            tags:
-                - Attendance
-            summary: Delete an attendance record
-            parameters:
-                - in: path
-                  name: id
-                  required: true
-                  schema:
-                      type: integer
-            responses:
-                "200":
-                    description: Attendance record deleted successfully
 
     /warehouse-store-product:
         get:
