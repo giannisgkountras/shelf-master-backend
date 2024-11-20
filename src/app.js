@@ -3,8 +3,11 @@ const bodyParser = require('body-parser');
 const warehouseRoutes = require('./routes/warehouseRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 const setupSwagger = require('./config/swagger');
+const cors = require('cors');
 
 const app = express();
+// Enable CORS for all origins
+app.use(cors());
 
 app.use(bodyParser.json());
 
