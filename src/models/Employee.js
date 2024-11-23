@@ -31,14 +31,14 @@ const Employee = {
     },
 
     updateEmployee: async (employeeId, employeeData) => {
-        const { fullName, email, role, warehouseID, password } = employeeData;
+        const { fullName, email, role, warehouseID } = employeeData;
 
         // Hash the password
-        const hashedPassword = await bcrypt.hash(password, 10);
+        // const hashedPassword = await bcrypt.hash(password, 10);
 
         const [result] = await db.query(
-            'UPDATE employee SET fullName = ?, email = ?, role = ?, warehouseID = ?, password = ? WHERE id = ?',
-            [fullName, email, role, warehouseID, hashedPassword, employeeId]
+            'UPDATE employee SET fullName = ?, email = ?, role = ?, warehouseID = ? WHERE id = ?',
+            [fullName, email, role, warehouseID, employeeId]
         );
         return {
             id: employeeId,
