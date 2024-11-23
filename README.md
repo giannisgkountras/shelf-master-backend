@@ -53,7 +53,7 @@ DB_NAME=yourdatabase
    Start the development server:
 
 ```bash
-node src/server.js
+npm start
 ```
 
 The server will be accessible at: http://localhost:3000.
