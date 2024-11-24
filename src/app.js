@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const warehouseRoutes = require('./routes/warehouseRoutes');
 const customerRoutes = require('./routes/customerRoutes');
 const employeeRoutes = require('./routes/employeeRoutes');
+const productRoutes = require('./routes/productRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 const setupSwagger = require('./config/swagger');
 const cors = require('cors');
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use('/api/warehouses', warehouseRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/employees', employeeRoutes);
+app.use('/api/products', productRoutes);
 
 // Swagger
 setupSwagger(app);
