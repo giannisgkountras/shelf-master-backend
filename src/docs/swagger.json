@@ -966,7 +966,7 @@
                 }
             }
         },
-        "/supplier-supplies-product": {
+        "/supplies": {
             "get": {
                 "tags": ["Supplier Supplies Product"],
                 "summary": "Retrieve all supply transactions",
@@ -1007,7 +1007,7 @@
                 }
             }
         },
-        "/supplier-supplies-product/{id}": {
+        "/supplies/{id}": {
             "get": {
                 "tags": ["Supplier Supplies Product"],
                 "summary": "Retrieve details of a specific supply transaction",
