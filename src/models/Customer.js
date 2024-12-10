@@ -2,33 +2,75 @@ const db = require('../config/db');
 
 const Customer = {
     getAllCustomers: async () => {
-        const [rows] = await db.query('SELECT * FROM customer');
+        const [rows] = await db.query('SELECT * FROM Customer');
         return rows;
     },
     getCustomerById: async (customerId) => {
-        const [rows] = await db.query('SELECT * FROM customer WHERE id = ?', [
+        const [rows] = await db.query('SELECT * FROM Customer WHERE id = ?', [
             customerId,
         ]);
         return rows[0];
     },
     createCustomer: async (customerData) => {
-        const { name, email, phone, street, zip } = customerData;
+        const { name, email, phone, street, zip, city } = customerData;
+
+        // Check if the Address already exists
+        const [existingAddress] = await db.query(
+            'SELECT * FROM Address WHERE zip = ? AND street = ?',
+            [zip, street]
+        );
+
+        if (!existingAddress.length) {
+            // Insert new address if it doesn't exist
+            await db.query(
+                'INSERT INTO Address (zip, street, city) VALUES (?, ?, ?)',
+                [zip, street, city]
+            );
+        }
+
+        // Insert the customer
         const [result] = await db.query(
-            'INSERT INTO customer (name, email, phone, street, zip ) VALUES (?, ?, ?, ?, ?)',
+            'INSERT INTO Customer (name, email, phone, street, zip) VALUES (?, ?, ?, ?, ?)',
             [name, email, phone, street, zip]
         );
-        return result;
+
+        return { id: result.insertId, ...customerData };
     },
+
     updateCustomer: async (customerId, customerData) => {
-        const { name, email, phone, street, zip } = customerData;
-        const [result] = await db.query(
-            'UPDATE customer SET name = ?, email = ?, phone = ?, street = ?, zip = ? WHERE id = ?',
+        const { name, email, phone, street, zip, city } = customerData;
+
+        // Check if the Address already exists
+        const [existingAddress] = await db.query(
+            'SELECT * FROM Address WHERE zip = ? AND street = ?',
+            [zip, street]
+        );
+
+        if (!existingAddress.length) {
+            // Insert new Address if it doesn't exist
+            await db.query(
+                'INSERT INTO Address (zip, street, city) VALUES (?, ?, ?)',
+                [zip, street, city]
+            );
+        } else {
+            // Optionally update city in the Address if needed
+            await db.query(
+                'UPDATE Address SET city = ? WHERE zip = ? AND street = ?',
+                [city, zip, street]
+            );
+        }
+
+        // Update the customer
+        await db.query(
+            'UPDATE Customer SET name = ?, email = ?, phone = ?, street = ?, zip = ? WHERE id = ?',
             [name, email, phone, street, zip, customerId]
         );
+
         return { id: customerId, ...customerData };
     },
+
     deleteCustomer: async (customerId) => {
-        const [result] = await db.query('DELETE FROM customer WHERE id = ?', [
+        const [result] = await db.query('DELETE FROM Customer WHERE id = ?', [
             customerId,
         ]);
         return result;

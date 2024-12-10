@@ -14,20 +14,60 @@ const Warehouse = {
     },
 
     createWarehouse: async (warehouseData) => {
-        const { capacity, street, zip } = warehouseData;
+        const { capacity, street, zip, city } = warehouseData;
+
+        // Check if the address already exists
+        const [existingAddress] = await db.query(
+            'SELECT * FROM address WHERE zip = ? AND street = ?',
+            [zip, street]
+        );
+
+        if (!existingAddress.length) {
+            // Insert new address if it doesn't exist
+            await db.query(
+                'INSERT INTO address (zip, street, city) VALUES (?, ?, ?)',
+                [zip, street, city]
+            );
+        }
+
+        // Insert the warehouse
         const [result] = await db.query(
             'INSERT INTO warehouse (capacity, street, zip) VALUES (?, ?, ?)',
             [capacity, street, zip]
         );
-        return result;
+
+        return { id: result.insertId, ...warehouseData };
     },
 
     updateWarehouse: async (warehouseId, warehouseData) => {
-        const { capacity, street, zip } = warehouseData;
-        const [result] = await db.query(
+        const { capacity, street, zip, city } = warehouseData;
+
+        // Check if the address already exists
+        const [existingAddress] = await db.query(
+            'SELECT * FROM address WHERE zip = ? AND street = ?',
+            [zip, street]
+        );
+
+        if (!existingAddress.length) {
+            // Insert new address if it doesn't exist
+            await db.query(
+                'INSERT INTO address (zip, street, city) VALUES (?, ?, ?)',
+                [zip, street, city]
+            );
+        } else {
+            // Optionally update city in the address if needed
+            await db.query(
+                'UPDATE address SET city = ? WHERE zip = ? AND street = ?',
+                [city, zip, street]
+            );
+        }
+
+        // Update the warehouse
+        await db.query(
             'UPDATE warehouse SET capacity = ?, street = ?, zip = ? WHERE id = ?',
             [capacity, street, zip, warehouseId]
         );
+
         return { id: warehouseId, ...warehouseData };
     },
 
