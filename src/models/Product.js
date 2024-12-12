@@ -22,13 +22,13 @@ const Product = {
 
         // Step 1: Check if the product_category exists
         const [categoryCheck] = await db.query(
-            'SELECT name FROM ProductCategory WHERE name = ?',
+            'SELECT name FROM Product_Category WHERE name = ?',
             [product_category]
         );
 
         // Step 2: If the category does not exist, create it
         if (categoryCheck.length === 0) {
-            await db.query('INSERT INTO ProductCategory (name) VALUES (?)', [
+            await db.query('INSERT INTO Product_Category (name) VALUES (?)', [
                 product_category,
             ]);
         }
