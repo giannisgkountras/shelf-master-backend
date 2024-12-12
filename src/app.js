@@ -6,6 +6,7 @@ const employeeRoutes = require('./routes/employeeRoutes');
 const productRoutes = require('./routes/productRoutes');
 const supplierRoutes = require('./routes/supplierRoutes');
 const supplierSuppliesProductRoutes = require('./routes/supplierSuppliesProductRoutes');
+const warehouseStoreProductRoutes = require('./routes/warehouseStoreProductRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 const setupSwagger = require('./config/swagger');
 const cors = require('cors');
@@ -23,6 +24,7 @@ app.use('/api/employees', employeeRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/suppliers', supplierRoutes);
 app.use('/api/supplies', supplierSuppliesProductRoutes);
+app.use('/api/inventory', warehouseStoreProductRoutes);
 // Swagger
 setupSwagger(app);
 
