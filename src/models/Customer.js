@@ -2,7 +2,9 @@ const db = require('../config/db');
 
 const Customer = {
     getAllCustomers: async () => {
-        const [rows] = await db.query('SELECT * FROM Customer');
+        const [rows] = await db.query(
+            'SELECT * FROM Customer JOIN Address ON Customer.zip = Address.zip AND Customer.street = Address.street'
+        );
         return rows;
     },
     getCustomerById: async (customerId) => {

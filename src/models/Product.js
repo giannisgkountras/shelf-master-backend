@@ -3,14 +3,14 @@ const db = require('../config/db');
 const Product = {
     getAllProducts: async () => {
         const [rows] = await db.query(
-            'SELECT id, name, manufacturer, description, price, product_category FROM product'
+            'SELECT id, name, manufacturer, description, price, product_category FROM Product'
         );
         return rows;
     },
 
     getProductById: async (productId) => {
         const [rows] = await db.query(
-            'SELECT id, name, manufacturer, description, price, product_category FROM product WHERE id = ?',
+            'SELECT id, name, manufacturer, description, price, product_category FROM Product WHERE id = ?',
             [productId]
         );
         return rows[0];
@@ -20,10 +20,26 @@ const Product = {
         const { name, manufacturer, description, price, product_category } =
             productData;
 
+        // Step 1: Check if the product_category exists
+        const [categoryCheck] = await db.query(
+            'SELECT name FROM ProductCategory WHERE name = ?',
+            [product_category]
+        );
+
+        // Step 2: If the category does not exist, create it
+        if (categoryCheck.length === 0) {
+            await db.query('INSERT INTO ProductCategory (name) VALUES (?)', [
+                product_category,
+            ]);
+        }
+
+        // Step 3: Insert the product
         const [result] = await db.query(
-            'INSERT INTO product (name, manufacturer, description, price, product_category) VALUES (?, ?, ?, ?, ?)',
+            'INSERT INTO Product (name, manufacturer, description, price, product_category) VALUES (?, ?, ?, ?, ?)',
             [name, manufacturer, description, price, product_category]
         );
+
+        // Step 4: Return the result of the insert operation
         return result;
     },
 
@@ -32,7 +48,7 @@ const Product = {
             productData;
 
         const [result] = await db.query(
-            'UPDATE product SET name = ?, manufacturer = ?, description = ?, price = ?, product_category = ? WHERE id = ?',
+            'UPDATE Product SET name = ?, manufacturer = ?, description = ?, price = ?, product_category = ? WHERE id = ?',
             [
                 name,
                 manufacturer,
@@ -53,7 +69,7 @@ const Product = {
     },
 
     deleteProduct: async (productId) => {
-        const [result] = await db.query('DELETE FROM product WHERE id = ?', [
+        const [result] = await db.query('DELETE FROM Product WHERE id = ?', [
             productId,
         ]);
         return result;

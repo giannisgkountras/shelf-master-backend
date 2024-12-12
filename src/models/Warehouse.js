@@ -2,12 +2,14 @@ const db = require('../config/db');
 
 const Warehouse = {
     getAllWarehouses: async () => {
-        const [rows] = await db.query('SELECT * FROM warehouse');
+        const [rows] = await db.query(
+            'SELECT * FROM Warehouse JOIN Address ON Warehouse.zip = Address.zip AND Warehouse.street = Address.street'
+        );
         return rows;
     },
 
     getWarehouseById: async (warehouseId) => {
-        const [rows] = await db.query('SELECT * FROM warehouse WHERE id = ?', [
+        const [rows] = await db.query('SELECT * FROM Warehouse WHERE id = ?', [
             warehouseId,
         ]);
         return rows[0];
@@ -18,21 +20,21 @@ const Warehouse = {
 
         // Check if the address already exists
         const [existingAddress] = await db.query(
-            'SELECT * FROM address WHERE zip = ? AND street = ?',
+            'SELECT * FROM Address WHERE zip = ? AND street = ?',
             [zip, street]
         );
 
         if (!existingAddress.length) {
             // Insert new address if it doesn't exist
             await db.query(
-                'INSERT INTO address (zip, street, city) VALUES (?, ?, ?)',
+                'INSERT INTO Address (zip, street, city) VALUES (?, ?, ?)',
                 [zip, street, city]
             );
         }
 
         // Insert the warehouse
         const [result] = await db.query(
-            'INSERT INTO warehouse (capacity, street, zip) VALUES (?, ?, ?)',
+            'INSERT INTO Warehouse (capacity, street, zip) VALUES (?, ?, ?)',
             [capacity, street, zip]
         );
 
@@ -44,27 +46,27 @@ const Warehouse = {
 
         // Check if the address already exists
         const [existingAddress] = await db.query(
-            'SELECT * FROM address WHERE zip = ? AND street = ?',
+            'SELECT * FROM Address WHERE zip = ? AND street = ?',
             [zip, street]
         );
 
         if (!existingAddress.length) {
             // Insert new address if it doesn't exist
             await db.query(
-                'INSERT INTO address (zip, street, city) VALUES (?, ?, ?)',
+                'INSERT INTO Address (zip, street, city) VALUES (?, ?, ?)',
                 [zip, street, city]
             );
         } else {
             // Optionally update city in the address if needed
             await db.query(
-                'UPDATE address SET city = ? WHERE zip = ? AND street = ?',
+                'UPDATE Address SET city = ? WHERE zip = ? AND street = ?',
                 [city, zip, street]
             );
         }
 
         // Update the warehouse
         await db.query(
-            'UPDATE warehouse SET capacity = ?, street = ?, zip = ? WHERE id = ?',
+            'UPDATE Warehouse SET capacity = ?, street = ?, zip = ? WHERE id = ?',
             [capacity, street, zip, warehouseId]
         );
 
@@ -72,7 +74,7 @@ const Warehouse = {
     },
 
     deleteWarehouse: async (warehouseId) => {
-        const [result] = await db.query('DELETE FROM warehouse WHERE id = ?', [
+        const [result] = await db.query('DELETE FROM Warehouse WHERE id = ?', [
             warehouseId,
         ]);
         return result;
