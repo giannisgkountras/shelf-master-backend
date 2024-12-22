@@ -3,7 +3,14 @@ const db = require('../config/db');
 const SupplierSuppliesProduct = {
     getAllSupplies: async () => {
         const [rows] = await db.query(
-            'SELECT id, timestamp, quantity, productID, supplierID FROM Supplier_Supplies_Product'
+            `SELECT 
+                ssp.id, ssp.timestamp, ssp.quantity, ssp.productID, ssp.supplierID, p.name as productName, s.name as supplierName
+            FROM
+                Supplier_Supplies_Product ssp
+            JOIN
+                Product p ON ssp.productID = p.id
+            JOIN
+                Supplier s ON ssp.supplierID = s.id`
         );
         return rows;
     },
