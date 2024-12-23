@@ -3,7 +3,13 @@ const db = require('../config/db');
 const WarehouseStoreProduct = {
     getAllInventory: async () => {
         const [rows] = await db.query(
-            'SELECT id, timestamp, quantity, productID, warehouseID FROM Warehouse_Store_Product'
+            `SELECT 
+                WSP.id, WSP.timestamp, WSP.quantity, p.name as productName, WSP.warehouseID 
+                FROM 
+                    Warehouse_Store_Product WSP
+                JOIN 
+                    Product as p ON WSP.productID = p.id
+                ORDER BY WSP.timestamp DESC`
         );
         return rows;
     },
