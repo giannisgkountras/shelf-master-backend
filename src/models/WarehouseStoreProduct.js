@@ -4,12 +4,13 @@ const WarehouseStoreProduct = {
     getAllInventory: async () => {
         const [rows] = await db.query(
             `SELECT 
-                WSP.id, WSP.timestamp, WSP.quantity, p.name as productName, WSP.warehouseID 
-                FROM 
-                    Warehouse_Store_Product WSP
-                JOIN 
-                    Product as p ON WSP.productID = p.id
-                ORDER BY WSP.timestamp DESC`
+                WSP.id, DATE_FORMAT(WSP.timestamp, '%Y-%m-%d %H:%i:%s') as timestamp, WSP.quantity, 
+                p.name as productName, WSP.warehouseID 
+            FROM 
+                Warehouse_Store_Product WSP
+            JOIN 
+                Product p ON WSP.productID = p.id
+            ORDER BY WSP.timestamp DESC`
         );
         return rows;
     },
