@@ -4,8 +4,7 @@ const WarehouseStoreProduct = {
     getAllInventory: async () => {
         const [rows] = await db.query(
             `SELECT 
-                WSP.id, DATE_FORMAT(WSP.timestamp, '%Y-%m-%d %H:%i:%s') as timestamp, WSP.quantity, 
-                p.name as productName, WSP.warehouseID 
+                WSP.id, WSP.timestamp as timestamp, WSP.quantity, p.name as productName, WSP.warehouseID 
             FROM 
                 Warehouse_Store_Product WSP
             JOIN 
