@@ -4,7 +4,8 @@ const SupplierSuppliesProduct = {
     getAllSupplies: async () => {
         const [rows] = await db.query(
             `SELECT 
-                ssp.id, ssp.timestamp, ssp.quantity, ssp.productID, ssp.supplierID, p.name as productName, s.name as supplierName
+                ssp.id, ssp.timestamp as timestamp, ssp.quantity, ssp.productID, 
+                ssp.supplierID, p.name as productName, s.name as supplierName
             FROM
                 Supplier_Supplies_Product ssp
             JOIN
