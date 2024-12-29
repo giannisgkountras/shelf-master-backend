@@ -50,6 +50,10 @@
         {
             "name": "Sales",
             "description": "Operations related to sales transactions"
+        },
+        {
+            "name": "Available Products In Warehouses",
+            "description": "Operations related to current warehouse inventory management"
         }
     ],
     "paths": {
@@ -1077,6 +1081,27 @@
                 "responses": {
                     "200": {
                         "description": "Supply transaction deleted successfully"
+                    }
+                }
+            }
+        },
+        "/available-products-in-warehouse/{id}": {
+            "get": {
+                "tags": ["Available Products In Warehouses"],
+                "summary": "Retrieve details of all products currently stored in a specific warehouse",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details of currently available products in the chosen warehouse"
                     }
                 }
             }
