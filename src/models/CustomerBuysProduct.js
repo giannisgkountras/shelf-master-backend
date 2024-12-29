@@ -4,15 +4,15 @@ const CustomerBuysProduct = {
     getAllSales: async () => {
         const [rows] = await db.query(
             `SELECT 
-                cbp.id, cbp.timestamp, cbp.quantity, cbp.productID, 
-                cbp.customerID, c.name as customerName, p.name as productName
+                CBP.id, cbp.timestamp, CBP.quantity, CBP.productID, 
+                CBP.customerID, c.name as customerName, p.name as productName
             FROM
-                Customer_Buys_Product cbp
+                Customer_Buys_Product CBP
             JOIN
-                Product p ON cbp.productID = p.id
+                Product p ON CBP.productID = p.id
             JOIN
-                Customer c ON cbp.customerID = c.id
-            ORDER BY timestamp DESC`
+                Customer c ON CBP.customerID = c.id
+            ORDER BY CBP.timestamp DESC`
         );
         return rows;
     },
