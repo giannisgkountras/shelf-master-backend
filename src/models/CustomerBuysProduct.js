@@ -4,7 +4,7 @@ const CustomerBuysProduct = {
     getAllSales: async () => {
         const [rows] = await db.query(
             `SELECT 
-                CBP.id, cbp.timestamp, CBP.quantity, CBP.productID, 
+                CBP.id, CBP.timestamp, CBP.quantity, CBP.productID, 
                 CBP.customerID, c.name as customerName, p.name as productName
             FROM
                 Customer_Buys_Product CBP
