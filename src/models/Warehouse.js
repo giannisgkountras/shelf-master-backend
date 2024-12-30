@@ -84,7 +84,6 @@ const Warehouse = {
         const [capacity] = await db.query(
             'SELECT warehouseID, available_capacity FROM Available_Capacity'
         );
-        console.log('YES');
         return capacity;
     },
     getAllWarehouses: async () => {
