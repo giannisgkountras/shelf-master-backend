@@ -50,10 +50,6 @@
         {
             "name": "Sales",
             "description": "Operations related to sales transactions"
-        },
-        {
-            "name": "Available Products In Warehouses",
-            "description": "Operations related to current warehouse inventory management"
         }
     ],
     "paths": {
@@ -1085,9 +1081,9 @@
                 }
             }
         },
-        "/available-products-in-warehouse/{id}": {
+        "/warehouses/current-inventory/{id}": {
             "get": {
-                "tags": ["Available Products In Warehouses"],
+                "tags": ["Warehouse"],
                 "summary": "Retrieve details of all products currently stored in a specific warehouse",
                 "parameters": [
                     {
@@ -1102,6 +1098,17 @@
                 "responses": {
                     "200": {
                         "description": "Details of currently available products in the chosen warehouse"
+                    }
+                }
+            }
+        },
+        "/warehouses/current-capacity": {
+            "get": {
+                "tags": ["Warehouse"],
+                "summary": "Retrieve information on the current available capacity for all warehouses",
+                "responses": {
+                    "200": {
+                        "description": "Information about the current available capacity for each warehouse"
                     }
                 }
             }
