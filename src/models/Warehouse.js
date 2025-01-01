@@ -79,6 +79,28 @@ const Warehouse = {
         ]);
         return result;
     },
+
+    getCurrentCapacityForAllWarehouses: async () => {
+        const [capacity] = await db.query(
+            'SELECT warehouseID, available_capacity FROM Available_Capacity'
+        );
+        return capacity;
+    },
+    getAllWarehouses: async () => {
+        const [rows] = await db.query(
+            'SELECT * FROM Warehouse JOIN Address ON Warehouse.zip = Address.zip AND Warehouse.street = Address.street'
+        );
+        return rows;
+    },
+    getCurrentInventoryForWarehouse: async (warehouseId) => {
+        const [rows] = await db.query(
+            `SELECT
+                productID, product as productName, quantity
+            FROM
+                Available_Products_In_Warehouse_${warehouseId}`
+        );
+        return rows;
+    },
 };
 
 module.exports = Warehouse;

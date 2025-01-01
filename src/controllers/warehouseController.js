@@ -49,10 +49,32 @@ const deleteWarehouse = async (req, res, next) => {
     }
 };
 
+const getCurrentCapacityForAllWarehouses = async (req, res, next) => {
+    try {
+        const currentCapacity =
+            await Warehouse.getCurrentCapacityForAllWarehouses();
+        res.json(currentCapacity);
+    } catch (error) {
+        next(error);
+    }
+};
+
+const getCurrentInventoryForWarehouse = async (req, res, next) => {
+    try {
+        const currentInventory =
+            await Warehouse.getCurrentInventoryForWarehouse(req.params.id);
+        res.json(currentInventory);
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     getWarehouses,
     getWarehouseById,
     createWarehouse,
     updateWarehouse,
     deleteWarehouse,
+    getCurrentCapacityForAllWarehouses,
+    getCurrentInventoryForWarehouse,
 };
