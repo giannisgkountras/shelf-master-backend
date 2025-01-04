@@ -4,7 +4,7 @@ const Attendance = {
     getAllAtendances: async () => {
         const [rows] = await db.query(
             `SELECT
-                Att.timestamp, Att.status, Att.employeeID, e.fullName, e.role
+                Att.timestamp, Att.status, Att.employeeID, e.fullName, e.role, e.warehouseID
             FROM
                 Attendance Att
             JOIN
