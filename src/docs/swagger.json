@@ -621,6 +621,122 @@
                 }
             }
         },
+        "/attendance/{id}": {
+            "put": {
+                "tags": ["Attendance"],
+                "summary": "Update an existing attendance",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "employee_id": {
+                                        "type": "integer"
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "enum": ["in", "out"]
+                                    },
+                                    "timestamp": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Attendance updated successfully"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Attendance"],
+                "summary": "Delete an attendance",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Attendance deleted successfully"
+                    }
+                }
+            }
+        },
+        "/attendance/employees/{id}": {
+            "get": {
+                "tags": ["Attendance"],
+                "summary": "Retrieve all attendances realted to a specific employee",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details of all attendances of a specific employee identified by their id"
+                    }
+                }
+            }
+        },
+        "/attendance/employees-on-duty": {
+            "get": {
+                "tags": ["Attendance"],
+                "summary": "Retrieve all employees currently on duty",
+                "responses": {
+                    "200": {
+                        "description": "Details of all employees currently on duty at any warehouse of the warehouse chain"
+                    }
+                }
+            }
+        },
+        "/attendance/employees-on-duty/warehouses/{id}": {
+            "get": {
+                "tags": ["Attendance"],
+                "summary": "Retrieve all employees of a specific warehouse who are currently on duty",
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": "true",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details of all employees currently on duty at a specific warehouse identified by its id"
+                    }
+                }
+            }
+        },
         "/warehouse-store-product": {
             "get": {
                 "tags": ["Warehouse Store Product"],
