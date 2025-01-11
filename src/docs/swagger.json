@@ -1,1231 +1,537 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "ShelfMasterDB API",
-        "description": "REST API for managing customers, products, suppliers, warehouses, and more for ShelfMasterDB.",
+        "title": "API Documentation",
         "version": "1.0.0"
     },
-    "servers": [
-        {
-            "url": "http://localhost:3000"
-        }
-    ],
-    "tags": [
-        {
-            "name": "Employees",
-            "description": "Operations related to employee management"
-        },
-        {
-            "name": "Attendance",
-            "description": "Operations related to employee attendance records"
-        },
-        {
-            "name": "Warehouse",
-            "description": "Operations related to Warehouses management"
-        },
-        {
-            "name": "Warehouse Store Product",
-            "description": "Operations related to warehouse storage management"
-        },
-        {
-            "name": "Suppliers",
-            "description": "Operations related to supplier management"
-        },
-        {
-            "name": "Supplier Supplies Product",
-            "description": "Operations related to supply transactions from suppliers"
-        },
-        {
-            "name": "Customers",
-            "description": "Operations related to customer management"
-        },
-        {
-            "name": "Products",
-            "description": "Operations related to product management"
-        },
-        {
-            "name": "Product Categories",
-            "description": "Operations related to product category management"
-        },
-        {
-            "name": "Sales",
-            "description": "Operations related to sales transactions"
-        }
-    ],
     "paths": {
-        "/customers": {
-            "get": {
-                "summary": "Retrieve a list of all customers",
-                "tags": ["Customers"],
-                "responses": {
-                    "200": {
-                        "description": "A list of customers"
-                    }
-                }
-            },
-            "post": {
-                "summary": "Create a new customer",
-                "tags": ["Customers"],
-                "responses": {
-                    "201": {
-                        "description": "Customer created"
-                    }
-                }
-            }
-        },
-        "/customers/{id}": {
-            "get": {
-                "summary": "Retrieve details of a specific customer",
-                "tags": ["Customers"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Customer details"
-                    }
-                }
-            },
-            "put": {
-                "summary": "Update an existing customer",
-                "tags": ["Customers"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Customer updated"
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Delete a customer",
-                "tags": ["Customers"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Customer deleted"
-                    }
-                }
-            }
-        },
-        "/products": {
-            "get": {
-                "summary": "Retrieve a list of all products",
-                "tags": ["Products"],
-                "responses": {
-                    "200": {
-                        "description": "A list of products"
-                    }
-                }
-            },
-            "post": {
-                "summary": "Create a new product",
-                "tags": ["Products"],
-                "responses": {
-                    "201": {
-                        "description": "Product created"
-                    }
-                }
-            }
-        },
-        "/products/{id}": {
-            "get": {
-                "summary": "Retrieve details of a specific product",
-                "tags": ["Products"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Product details"
-                    }
-                }
-            },
-            "put": {
-                "summary": "Update an existing product",
-                "tags": ["Products"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Product updated"
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Delete a product",
-                "tags": ["Products"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Product deleted"
-                    }
-                }
-            }
-        },
-        "/productcategories": {
-            "get": {
-                "summary": "Retrieve all product categories",
-                "tags": ["Product Categories"],
-                "responses": {
-                    "200": {
-                        "description": "A list of product categories"
-                    }
-                }
-            },
-            "post": {
-                "summary": "Create a new product category",
-                "tags": ["Product Categories"],
-                "responses": {
-                    "201": {
-                        "description": "Product category created"
-                    }
-                }
-            }
-        },
-        "/productcategories/{name}": {
-            "delete": {
-                "summary": "Delete a product category",
-                "tags": ["Product Categories"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "name",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Product category deleted"
-                    }
-                }
-            }
-        },
-        "/customer-buys-product": {
-            "get": {
-                "summary": "Retrieve all purchase transactions",
-                "tags": ["Sales"],
-                "responses": {
-                    "200": {
-                        "description": "A list of purchase transactions"
-                    }
-                }
-            },
-            "post": {
-                "summary": "Record a new purchase transaction",
-                "tags": ["Sales"],
-                "responses": {
-                    "201": {
-                        "description": "Purchase transaction recorded"
-                    }
-                }
-            }
-        },
-        "/customer-buys-product/{id}": {
-            "get": {
-                "summary": "Retrieve details of a specific purchase transaction",
-                "tags": ["Sales"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Purchase transaction details"
-                    }
-                }
-            },
-            "put": {
-                "summary": "Update a purchase transaction",
-                "tags": ["Sales"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Purchase transaction updated"
-                    }
-                }
-            },
-            "delete": {
-                "summary": "Delete a purchase transaction",
-                "tags": ["Sales"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Purchase transaction deleted"
-                    }
-                }
-            }
-        },
-        "/customers/{id}/purchased-products": {
-            "get": {
-                "summary": "Get products purchased by a specific customer",
-                "tags": ["Sales"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "List of products purchased by the customer"
-                    }
-                }
-            }
-        },
-        "/products/{id}/suppliers": {
-            "get": {
-                "summary": "Get suppliers for a specific product",
-                "tags": ["Products"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "List of suppliers for the product"
-                    }
-                }
-            }
-        },
-        "/warehouses/{id}/stored-products": {
-            "get": {
-                "summary": "Get products stored in a specific warehouse",
-                "tags": ["Warehouse"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "List of products stored in the warehouse"
-                    }
-                }
-            }
-        },
-        "/warehouses/{id}/employees": {
-            "get": {
-                "summary": "Get employees working at a specific warehouse",
-                "tags": ["Warehouse"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "List of employees at the warehouse"
-                    }
-                }
-            }
-        },
-        "/suppliers/{id}/supplied-products": {
-            "get": {
-                "summary": "Get supplier product supply summary",
-                "tags": ["Suppliers"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "List of products supplied by the supplier"
-                    }
-                }
-            }
-        },
-        "/products/{id}/warehouse-availability": {
-            "get": {
-                "summary": "Get product stock availability across warehouses",
-                "tags": ["Products"],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Stock availability of the product across warehouses"
-                    }
-                }
-            }
-        },
-        "/employees": {
-            "get": {
-                "tags": ["Employees"],
-                "summary": "Retrieve a list of all employees",
-                "responses": {
-                    "200": {
-                        "description": "A list of employees"
-                    }
-                }
-            },
-            "post": {
-                "tags": ["Employees"],
-                "summary": "Create a new employee",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "position": {
-                                        "type": "string"
-                                    },
-                                    "department": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Employee created successfully"
-                    }
-                }
-            }
-        },
-        "/employees/{id}": {
-            "get": {
-                "tags": ["Employees"],
-                "summary": "Retrieve details of a specific employee",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Employee details"
-                    }
-                }
-            },
-            "put": {
-                "tags": ["Employees"],
-                "summary": "Update an existing employee",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "position": {
-                                        "type": "string"
-                                    },
-                                    "department": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Employee updated successfully"
-                    }
-                }
-            },
-            "delete": {
-                "tags": ["Employees"],
-                "summary": "Delete an employee",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Employee deleted successfully"
-                    }
-                }
-            }
-        },
         "/attendance": {
             "get": {
                 "tags": ["Attendance"],
-                "summary": "Retrieve all attendance records",
+                "summary": "Get all attendances",
+                "operationId": "getAttendances",
                 "responses": {
-                    "200": {
-                        "description": "A list of attendance records"
-                    }
+                    "200": { "description": "Success" }
                 }
             },
             "post": {
                 "tags": ["Attendance"],
-                "summary": "Create a new attendance record",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "employee_id": {
-                                        "type": "integer"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "enum": ["in", "out"]
-                                    },
-                                    "timestamp": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
+                "summary": "Create a new attendance",
+                "operationId": "createAttendance",
                 "responses": {
-                    "201": {
-                        "description": "Attendance record created successfully"
-                    }
+                    "201": { "description": "Created" }
                 }
             }
         },
         "/attendance/{id}": {
             "put": {
                 "tags": ["Attendance"],
-                "summary": "Update an existing attendance",
+                "summary": "Update an attendance",
+                "operationId": "updateAttendance",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "employee_id": {
-                                        "type": "integer"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "enum": ["in", "out"]
-                                    },
-                                    "timestamp": {
-                                        "type": "string",
-                                        "format": "date-time"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 "responses": {
-                    "200": {
-                        "description": "Attendance updated successfully"
-                    }
+                    "200": { "description": "Updated" }
                 }
             },
             "delete": {
                 "tags": ["Attendance"],
                 "summary": "Delete an attendance",
+                "operationId": "deleteAttendance",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Attendance deleted successfully"
-                    }
+                    "204": { "description": "Deleted" }
                 }
             }
         },
         "/attendance/employees/{id}": {
             "get": {
                 "tags": ["Attendance"],
-                "summary": "Retrieve all attendances realted to a specific employee",
+                "summary": "Get all attendances by employee ID",
+                "operationId": "getAllAttendancesByEmployeeId",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Details of all attendances of a specific employee identified by their id"
-                    }
+                    "200": { "description": "Success" }
                 }
             }
         },
         "/attendance/employees-on-duty": {
             "get": {
                 "tags": ["Attendance"],
-                "summary": "Retrieve all employees currently on duty",
+                "summary": "Get all employees currently on duty",
+                "operationId": "getAllEmployeesOnDuty",
                 "responses": {
-                    "200": {
-                        "description": "Details of all employees currently on duty at any warehouse of the warehouse chain"
-                    }
+                    "200": { "description": "Success" }
                 }
             }
         },
         "/attendance/employees-on-duty/warehouses/{id}": {
             "get": {
                 "tags": ["Attendance"],
-                "summary": "Retrieve all employees of a specific warehouse who are currently on duty",
-                "parameters":[
+                "summary": "Get all employees on duty for a specific warehouse",
+                "operationId": "getAllEmployeesOnDutyForSpecificWarehouse",
+                "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
-                        "required": "true",
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "string" }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Details of all employees currently on duty at a specific warehouse identified by its id"
-                    }
+                    "200": { "description": "Success" }
                 }
             }
         },
-        "/warehouse-store-product": {
+        "/product-sales": {
             "get": {
-                "tags": ["Warehouse Store Product"],
-                "summary": "Retrieve all warehouse storage records",
+                "tags": ["Product Sales"],
+                "summary": "Get all sales",
+                "operationId": "getSales",
                 "responses": {
-                    "200": {
-                        "description": "A list of warehouse storage records"
-                    }
+                    "200": { "description": "Success" }
                 }
             },
             "post": {
-                "tags": ["Warehouse Store Product"],
-                "summary": "Add a new storage record",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "product_id": {
-                                        "type": "integer"
-                                    },
-                                    "warehouse_id": {
-                                        "type": "integer"
-                                    },
-                                    "quantity": {
-                                        "type": "integer"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
+                "tags": ["Product Sales"],
+                "summary": "Create a sale",
+                "operationId": "createSale",
                 "responses": {
-                    "201": {
-                        "description": "Storage record created successfully"
-                    }
+                    "201": { "description": "Created" }
                 }
             }
         },
-        "/warehouse-store-product/{id}": {
-            "get": {
-                "tags": ["Warehouse Store Product"],
-                "summary": "Retrieve details of a specific storage record",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Storage record details"
-                    }
-                }
-            },
-            "put": {
-                "tags": ["Warehouse Store Product"],
-                "summary": "Update a storage record",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "quantity": {
-                                        "type": "integer"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Storage record updated successfully"
-                    }
-                }
-            },
+        "/product-sales/{id}": {
             "delete": {
-                "tags": ["Warehouse Store Product"],
-                "summary": "Delete a storage record",
+                "tags": ["Product Sales"],
+                "summary": "Delete a sale",
+                "operationId": "deleteSale",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Storage record deleted successfully"
-                    }
+                    "204": { "description": "Deleted" }
                 }
             }
         },
-        "/warehouses": {
+        "/customers": {
             "get": {
-                "tags": ["Warehouse"],
-                "summary": "Retrieve a list of all warehouses",
+                "tags": ["Customers"],
+                "summary": "Get all customers",
+                "operationId": "getCustomers",
                 "responses": {
-                    "200": {
-                        "description": "A list of warehouses"
-                    }
+                    "200": { "description": "Success" }
                 }
             },
             "post": {
-                "tags": ["Warehouse"],
-                "summary": "Create a new warehouse",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "location": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
+                "tags": ["Customers"],
+                "summary": "Create a customer",
+                "operationId": "createCustomer",
                 "responses": {
-                    "201": {
-                        "description": "Warehouse created successfully"
-                    }
+                    "201": { "description": "Created" }
                 }
             }
         },
-        "/warehouses/{id}": {
+        "/customers/{id}": {
             "get": {
-                "tags": ["Warehouse"],
-                "summary": "Retrieve details of a specific warehouse",
+                "tags": ["Customers"],
+                "summary": "Get a customer by ID",
+                "operationId": "getCustomerById",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Warehouse details"
-                    }
+                    "200": { "description": "Success" }
                 }
             },
             "put": {
-                "tags": ["Warehouse"],
-                "summary": "Update an existing warehouse",
+                "tags": ["Customers"],
+                "summary": "Update a customer",
+                "operationId": "updateCustomer",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "location": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 "responses": {
-                    "200": {
-                        "description": "Warehouse updated successfully"
-                    }
+                    "200": { "description": "Updated" }
                 }
             },
             "delete": {
-                "tags": ["Warehouse"],
-                "summary": "Delete a warehouse",
+                "tags": ["Customers"],
+                "summary": "Delete a customer",
+                "operationId": "deleteCustomer",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Warehouse deleted successfully"
+                    "204": { "description": "Deleted" }
+                }
+            }
+        },
+        "/employees": {
+            "get": {
+                "tags": ["Employees"],
+                "summary": "Get all employees",
+                "operationId": "getEmployees",
+                "responses": {
+                    "200": { "description": "Success" }
+                }
+            },
+            "post": {
+                "tags": ["Employees"],
+                "summary": "Create an employee",
+                "operationId": "createEmployee",
+                "responses": {
+                    "201": { "description": "Created" }
+                }
+            }
+        },
+        "/employees/{id}": {
+            "get": {
+                "tags": ["Employees"],
+                "summary": "Get an employee by ID",
+                "operationId": "getEmployeeById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "string" }
                     }
+                ],
+                "responses": {
+                    "200": { "description": "Success" }
+                }
+            },
+            "put": {
+                "tags": ["Employees"],
+                "summary": "Update an employee",
+                "operationId": "updateEmployee",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": { "description": "Updated" }
+                }
+            },
+            "delete": {
+                "tags": ["Employees"],
+                "summary": "Delete an employee",
+                "operationId": "deleteEmployee",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "204": { "description": "Deleted" }
+                }
+            }
+        },
+        "/products": {
+            "get": {
+                "tags": ["Products"],
+                "summary": "Get all products",
+                "operationId": "getProducts",
+                "responses": {
+                    "200": { "description": "Success" }
+                }
+            },
+            "post": {
+                "tags": ["Products"],
+                "summary": "Create a product",
+                "operationId": "createProduct",
+                "responses": {
+                    "201": { "description": "Created" }
+                }
+            }
+        },
+        "/products/{id}": {
+            "get": {
+                "tags": ["Products"],
+                "summary": "Get a product by ID",
+                "operationId": "getProductById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": { "description": "Success" }
+                }
+            },
+            "put": {
+                "tags": ["Products"],
+                "summary": "Update a product",
+                "operationId": "updateProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "200": { "description": "Updated" }
+                }
+            },
+            "delete": {
+                "tags": ["Products"],
+                "summary": "Delete a product",
+                "operationId": "deleteProduct",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "string" }
+                    }
+                ],
+                "responses": {
+                    "204": { "description": "Deleted" }
                 }
             }
         },
         "/suppliers": {
             "get": {
                 "tags": ["Suppliers"],
-                "summary": "Retrieve a list of all suppliers",
+                "summary": "Get all suppliers",
+                "operationId": "getSuppliers",
                 "responses": {
-                    "200": {
-                        "description": "A list of suppliers"
-                    }
+                    "200": { "description": "Success" }
                 }
             },
             "post": {
                 "tags": ["Suppliers"],
-                "summary": "Create a new supplier",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "contact_info": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
+                "summary": "Create a supplier",
+                "operationId": "createSupplier",
                 "responses": {
-                    "201": {
-                        "description": "Supplier created successfully"
-                    }
+                    "201": { "description": "Created" }
                 }
             }
         },
         "/suppliers/{id}": {
             "get": {
                 "tags": ["Suppliers"],
-                "summary": "Retrieve details of a specific supplier",
+                "summary": "Get a supplier by ID",
+                "operationId": "getSupplierById",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Supplier details"
-                    }
+                    "200": { "description": "Success" }
                 }
             },
             "put": {
                 "tags": ["Suppliers"],
-                "summary": "Update an existing supplier",
+                "summary": "Update a supplier",
+                "operationId": "updateSupplier",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "contact_info": {
-                                        "type": "string"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 "responses": {
-                    "200": {
-                        "description": "Supplier updated successfully"
-                    }
+                    "200": { "description": "Updated" }
                 }
             },
             "delete": {
                 "tags": ["Suppliers"],
                 "summary": "Delete a supplier",
+                "operationId": "deleteSupplier",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Supplier deleted successfully"
-                    }
+                    "204": { "description": "Deleted" }
                 }
             }
         },
-        "/supplies": {
+        "/product-supplies": {
             "get": {
-                "tags": ["Supplier Supplies Product"],
-                "summary": "Retrieve all supply transactions",
+                "tags": ["Product Supplies"],
+                "summary": "Get all supplies",
+                "operationId": "getSupplies",
                 "responses": {
-                    "200": {
-                        "description": "A list of supply transactions"
-                    }
+                    "200": { "description": "Success" }
                 }
             },
             "post": {
-                "tags": ["Supplier Supplies Product"],
-                "summary": "Record a new supply transaction",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "supplier_id": {
-                                        "type": "integer"
-                                    },
-                                    "product_id": {
-                                        "type": "integer"
-                                    },
-                                    "quantity": {
-                                        "type": "integer"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
+                "tags": ["Product Supplies"],
+                "summary": "Create a supply",
+                "operationId": "createSupply",
                 "responses": {
-                    "201": {
-                        "description": "Supply transaction created successfully"
-                    }
+                    "201": { "description": "Created" }
                 }
             }
         },
-        "/supplies/{id}": {
-            "get": {
-                "tags": ["Supplier Supplies Product"],
-                "summary": "Retrieve details of a specific supply transaction",
+        "/product-supplies/{id}": {
+            "delete": {
+                "tags": ["Product Supplies"],
+                "summary": "Delete a supply",
+                "operationId": "deleteSupply",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Supply transaction details"
+                    "204": { "description": "Deleted" }
+                }
+            }
+        },
+        "/warehouses": {
+            "get": {
+                "tags": ["Warehouses"],
+                "summary": "Get all warehouses",
+                "operationId": "getWarehouses",
+                "responses": {
+                    "200": { "description": "Success" }
+                }
+            },
+            "post": {
+                "tags": ["Warehouses"],
+                "summary": "Create a warehouse",
+                "operationId": "createWarehouse",
+                "responses": {
+                    "201": { "description": "Created" }
+                }
+            }
+        },
+        "/warehouses/{id}": {
+            "get": {
+                "tags": ["Warehouses"],
+                "summary": "Get a warehouse by ID",
+                "operationId": "getWarehouseById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "string" }
                     }
+                ],
+                "responses": {
+                    "200": { "description": "Success" }
                 }
             },
             "put": {
-                "tags": ["Supplier Supplies Product"],
-                "summary": "Update a supply transaction",
+                "tags": ["Warehouses"],
+                "summary": "Update a warehouse",
+                "operationId": "updateWarehouse",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "quantity": {
-                                        "type": "integer"
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
                 "responses": {
-                    "200": {
-                        "description": "Supply transaction updated successfully"
-                    }
+                    "200": { "description": "Updated" }
                 }
             },
             "delete": {
-                "tags": ["Supplier Supplies Product"],
-                "summary": "Delete a supply transaction",
+                "tags": ["Warehouses"],
+                "summary": "Delete a warehouse",
+                "operationId": "deleteWarehouse",
                 "parameters": [
                     {
-                        "in": "path",
                         "name": "id",
+                        "in": "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "schema": { "type": "string" }
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Supply transaction deleted successfully"
-                    }
+                    "204": { "description": "Deleted" }
                 }
             }
         },
-        "/warehouses/current-inventory/{id}": {
+        "/warehouse-capacities": {
             "get": {
-                "tags": ["Warehouse"],
-                "summary": "Retrieve details of all products currently stored in a specific warehouse",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
+                "tags": ["Warehouses"],
+                "summary": "Get all warehouse capacities",
+                "operationId": "getWarehouseCapacities",
                 "responses": {
-                    "200": {
-                        "description": "Details of currently available products in the chosen warehouse"
-                    }
+                    "200": { "description": "Success" }
                 }
             }
         },
-        "/warehouses/current-capacity": {
+        "/employees-attendance": {
             "get": {
-                "tags": ["Warehouse"],
-                "summary": "Retrieve information on the current available capacity for all warehouses",
+                "tags": ["Attendance"],
+                "summary": "Get all employees' attendance",
+                "operationId": "getAllEmployeesAttendance",
                 "responses": {
-                    "200": {
-                        "description": "Information about the current available capacity for each warehouse"
-                    }
+                    "200": { "description": "Success" }
                 }
             }
         }
