@@ -27,7 +27,7 @@ Before running this project, ensure you have the following installed:
 
 ```bash
 git clone <repository-url>
-cd <repository-folder>
+cd shelf-master-backend
 ```
 
 2. Install dependencies
