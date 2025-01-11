@@ -42,10 +42,11 @@ npm install
 ```python
 PORT=3000
 DB_HOST=localhost
-DB_USER=root
+DB_USER=yourdbuser
 DB_PASSWORD=yourpassword
 DB_NAME=yourdatabase
 ```
+The default DB_NAME is `ShelfMasterDB`
 
 4. Set up the database
 
