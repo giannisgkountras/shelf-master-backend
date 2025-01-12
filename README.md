@@ -58,3 +58,4 @@ npm start
 ```
 
 The server will be accessible at: http://localhost:3000.
+View the list of all available endpoints at: http://localhost:3000/docs
